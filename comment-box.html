@@ -7,7 +7,8 @@
     <title>Comment Box</title>
 
     <style>
-        .comment {
+        .comment,
+        .review {
             border: 2px solid blue;
             background-color: lightcyan;
             margin: 10px;
@@ -15,37 +16,64 @@
             border-radius: 15px;
             max-width: 500px;
         }
+
+        .feedback {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
     </style>
 </head>
 
 <body>
     <h1>My Awesome Comment Box. Write what in your mind!!!</h1>
-    <section>
-        <h3>All comments here</h3>
-        <div id="comment-container">
-            <p class="comment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, aliquam laudantium
-                temporibus fugit culpa a quo enim explicabo exercitationem suscipit eveniet dolor modi quidem cum,
-                itaque harum et nostrum voluptatem!</p>
-            <p class="comment">Architecto beatae laboriosam soluta, quis explicabo facilis maiores reiciendis veritatis
-                quibusdam eligendi a, optio esse perspiciatis ad doloribus eveniet corporis molestiae ex commodi natus,
-                voluptates ducimus nam facere quod? Perspiciatis.</p>
-            <p class="comment">Dicta tenetur reprehenderit accusantium quos dolorem praesentium natus voluptatem
-                similique doloribus cum maiores modi explicabo, minima perferendis incidunt non ad assumenda, cumque
-                obcaecati vitae voluptatibus! Incidunt aut cum qui provident.</p>
-        </div>
-        <!-- <form> --- It refreshes the page after clicking button -->
+    <section class="feedback">
+        <div>
+            <h3>All comments here</h3>
+            <div id="comment-container">
+                <p class="comment">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, aliquam laudantium
+                    temporibus fugit culpa a quo enim explicabo exercitationem suscipit eveniet dolor modi quidem cum,
+                    itaque harum et nostrum voluptatem!</p>
+                <p class="comment">Architecto beatae laboriosam soluta, quis explicabo facilis maiores reiciendis
+                    veritatis
+                    quibusdam eligendi a, optio esse perspiciatis ad doloribus eveniet corporis molestiae ex commodi
+                    natus,
+                    voluptates ducimus nam facere quod? Perspiciatis.</p>
+                <p class="comment">Dicta tenetur reprehenderit accusantium quos dolorem praesentium natus voluptatem
+                    similique doloribus cum maiores modi explicabo, minima perferendis incidunt non ad assumenda, cumque
+                    obcaecati vitae voluptatibus! Incidunt aut cum qui provident.</p>
+            </div>
+            <!-- <form> --- It refreshes the page after clicking button -->
             <textarea name="" id="comment-text-box" cols="60" rows="5"></textarea>
             <br>
             <button id="btn-post-comment">Post Comment</button>
-        <!-- </form> -->
+            <!-- </form> -->
+        </div>
+
+        <div>
+            <h3>All reviews are here</h3>
+            <div id="review-container">
+                <p class="review">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident consectetur
+                    adipisci
+                    rem officia natus cupiditate beatae voluptatem porro numquam illum!</p>
+                <p class="review">Nostrum quod maxime cum, dolor ex laboriosam! Deleniti veniam, rem veritatis iste
+                    cupiditate blanditiis unde, eveniet autem libero excepturi vel.</p>
+                <p class="review">Quibusdam consequatur libero quam. Tempore, vitae et unde quas accusantium at
+                    consectetur
+                    recusandae adipisci? Quos in animi voluptate vitae tempora?</p>
+            </div>
+
+            <textarea name="" id="review-text-box" cols="60" rows="5"></textarea>
+            <br>
+            <button id="btn-review">Submit Your Review</button>
+        </div>
     </section>
 
     <script>
         // step--1: set an event handler to the button
         document.getElementById('btn-post-comment')
-            .addEventListener('click', function (){
+            .addEventListener('click', function () {
                 // step-2: get the text written in the comment text area
-                const commentTextBox = document.getElementById('comment-text-box');              
+                const commentTextBox = document.getElementById('comment-text-box');
                 const newComment = commentTextBox.value;
 
                 // step-3: get the parent node where to publish comment
@@ -62,7 +90,23 @@
 
                 // step-6: clean the text area
                 commentTextBox.value = '';
-                
+
+            })
+    </script>
+    <script>
+        document.getElementById('btn-review')
+            .addEventListener('click', function () {
+                const reviewTextBox = document.getElementById('review-text-box');
+                const newReviewText = reviewTextBox.value;
+
+                const newPara = document.createElement('p');
+                newPara.innerText = newReviewText;
+                newPara.classList.add('review');
+
+                const reviewContainer = document.getElementById('review-container');
+                reviewContainer.appendChild(newPara);
+
+                reviewTextBox.value = '';
             })
     </script>
 </body>
